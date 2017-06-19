@@ -8,12 +8,12 @@ public class Steps {
 
 
 
-    private int id;
+    private String id;
     private String shortDescription;
     private String description;
     private String videoURL;
 
-    public Steps(int id, String shortDescription, String description, String videoURL) {
+    public Steps(String id, String shortDescription, String description, String videoURL) {
 
         this.id = id;
         this.shortDescription = shortDescription;
@@ -22,11 +22,11 @@ public class Steps {
     }
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

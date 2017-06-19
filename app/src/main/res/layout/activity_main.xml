@@ -3,7 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vamshi.baking.MainActivity">
+    tools:context="com.example.vamshi.baking.UI.MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/text"
+        android:textSize="100dp"
+        android:text=""/>
 
 
 </android.support.constraint.ConstraintLayout>

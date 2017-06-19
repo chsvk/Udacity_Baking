@@ -6,23 +6,23 @@ package com.example.vamshi.baking.Data;
 
 public class Ingredients {
 
-    private int quantity;
+    private String quantity;
     private String measure;
     private String ingredient;
 
 
-    public Ingredients(int quantity, String measure, String ingredient) {
+    public Ingredients(String quantity, String measure, String ingredient) {
         this.quantity = quantity;
         this.measure = measure;
         this.ingredient = ingredient;
     }
 
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 

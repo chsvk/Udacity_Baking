@@ -8,13 +8,13 @@ import java.util.List;
 
 public class Recipe {
 
-    private int id;
+    private String id;
     private String name;
 //    public static List<Ingredients> ingredients;
 //    private List<Steps> steps;
-    private int servings;
+    private String servings;
 
-    public Recipe(int id, String name,  int servings) {
+    public Recipe(String id, String name,  String servings) {
         this.id = id;
         this.name = name;
 //        this.ingredients = ingredients;
@@ -22,11 +22,11 @@ public class Recipe {
         this.servings = servings;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -54,11 +54,11 @@ public class Recipe {
 //        this.steps = steps;
 //    }
 
-    public int getServings() {
+    public String getServings() {
         return servings;
     }
 
-    public void setServings(int servings) {
+    public void setServings(String servings) {
         this.servings = servings;
     }
 }
