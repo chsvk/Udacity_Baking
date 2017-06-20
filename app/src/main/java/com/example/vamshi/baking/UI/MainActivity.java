@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     public static List<Recipe> mRecipies;
     public static List<Ingredients> mIngredients;
     public static List<Steps> mSteps;
-
     private String url = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     public static ListView myList;
     public static ListAdapter myAdapter;

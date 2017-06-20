@@ -5,12 +5,19 @@
     android:layout_height="match_parent"
     tools:context="com.example.vamshi.baking.UI.MainActivity">
 
+   <!-- <TextView
+        android:id="@+id/text_view_for_testing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        -->
+
 
     <ListView
         android:id="@+id/Recipe_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="9dp"
         android:layout_gravity="center">
 
     </ListView>
