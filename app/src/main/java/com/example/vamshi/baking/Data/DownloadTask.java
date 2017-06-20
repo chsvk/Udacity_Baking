@@ -68,7 +68,7 @@ public class DownloadTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPostExecute(String s) {
 
-        MainActivity.text.setText(MainActivity.mRecipies.get(0).getName());
+        MainActivity.myList.setAdapter(MainActivity.myAdapter);
         super.onPostExecute(s);
     }
 }
