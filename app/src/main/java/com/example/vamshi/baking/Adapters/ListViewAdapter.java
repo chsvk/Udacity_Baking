@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.vamshi.baking.Data.Recipe;
 import com.example.vamshi.baking.R;
+import com.example.vamshi.baking.UI.MainActivity;
+import com.example.vamshi.baking.UI.SecondScreenDetails;
 
 import java.util.List;
 
@@ -19,10 +21,10 @@ import java.util.List;
  * Created by Vamshi on 6/20/2017.
  */
 
-public class ListViewAdapter extends ArrayAdapter<Recipe> implements View.OnClickListener {
+public class ListViewAdapter extends ArrayAdapter<Recipe>  {
 
 
-    public ListViewAdapter(@NonNull Context context, @NonNull List<Recipe> objects) {
+    public ListViewAdapter(Context context, @NonNull List<Recipe> objects) {
         super(context, R.layout.single_item, objects);
     }
 
@@ -54,8 +56,4 @@ public class ListViewAdapter extends ArrayAdapter<Recipe> implements View.OnClic
         return customView;
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

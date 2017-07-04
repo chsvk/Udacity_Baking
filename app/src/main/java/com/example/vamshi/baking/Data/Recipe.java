@@ -2,24 +2,30 @@ package com.example.vamshi.baking.Data;
 
 import java.util.List;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Vamshi on 6/16/2017.
  */
 
-public class Recipe {
+public class Recipe extends RealmObject{
 
     private String id;
     private String name;
-//    public static List<Ingredients> ingredients;
-//    private List<Steps> steps;
+    public static List<Ingredients> ingredients;
+    public static List<Steps> steps;
     private String servings;
 
-    public Recipe(String id, String name,  String servings) {
+    public Recipe(String id, String name,  String servings, List<Ingredients> ingredients, List<Steps> steps) {
         this.id = id;
         this.name = name;
-//        this.ingredients = ingredients;
-//        this.steps = steps;
+        this.ingredients = ingredients;
+        this.steps = steps;
         this.servings = servings;
+    }
+
+    public Recipe(){
+
     }
 
     public String getId() {
@@ -38,21 +44,21 @@ public class Recipe {
         this.name = name;
     }
 
-//    public List<Ingredients> getIngredients() {
-//        return ingredients;
-//    }
-//
-//    public void setIngredients(List<Ingredients> ingredients) {
-//        this.ingredients = ingredients;
-//    }
-//
-//    public List<Steps> getSteps() {
-//        return steps;
-//    }
-//
-//    public void setSteps(List<Steps> steps) {
-//        this.steps = steps;
-//    }
+    public static List<Ingredients> getIngredients() {
+        return ingredients;
+    }
+
+    public static void setIngredients(List<Ingredients> ingredients) {
+        Recipe.ingredients = ingredients;
+    }
+
+    public static List<Steps> getSteps() {
+        return steps;
+    }
+
+    public static void setSteps(List<Steps> steps) {
+        Recipe.steps = steps;
+    }
 
     public String getServings() {
         return servings;

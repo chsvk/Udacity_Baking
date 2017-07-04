@@ -1,10 +1,12 @@
 package com.example.vamshi.baking.Data;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Vamshi on 6/16/2017.
  */
 
-public class Ingredients {
+public class Ingredients extends RealmObject {
 
     private String quantity;
     private String measure;
@@ -15,6 +17,10 @@ public class Ingredients {
         this.quantity = quantity;
         this.measure = measure;
         this.ingredient = ingredient;
+    }
+
+    public Ingredients(){
+
     }
 
 

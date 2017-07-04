@@ -1,10 +1,12 @@
 package com.example.vamshi.baking.Data;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Vamshi on 6/16/2017.
  */
 
-public class Steps {
+public class Steps extends RealmObject{
 
 
 
@@ -19,6 +21,10 @@ public class Steps {
         this.shortDescription = shortDescription;
         this.description = description;
         this.videoURL = videoURL;
+    }
+
+    public Steps(){
+
     }
 
 
