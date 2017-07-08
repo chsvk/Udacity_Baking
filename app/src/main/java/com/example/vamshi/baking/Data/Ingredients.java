@@ -1,11 +1,10 @@
 package com.example.vamshi.baking.Data;
 
-
 /**
  * Created by Vamshi on 6/16/2017.
  */
 
-public class Ingredients {
+public class Ingredients  {
 
     private String quantity;
     private String measure;

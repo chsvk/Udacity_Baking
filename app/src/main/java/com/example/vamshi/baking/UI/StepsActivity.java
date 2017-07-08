@@ -1,0 +1,45 @@
+package com.example.vamshi.baking.UI;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import com.example.vamshi.baking.Data.Recipe;
+import com.example.vamshi.baking.Data.Steps;
+import com.example.vamshi.baking.R;
+import com.example.vamshi.baking.Retrofit.IRecipe;
+import com.example.vamshi.baking.Retrofit.RetrofitBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class StepsActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_steps);
+        Intent in = getIntent();
+        final int pos = Integer.parseInt(in.getStringExtra("position"));
+        IRecipe iRecipe = RetrofitBuilder.Retrieve();
+        Call<ArrayList<Recipe>> r = iRecipe.getRecipe();
+        r.enqueue(new Callback<ArrayList<Recipe>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
+                List<Recipe> rr = response.body();
+                List<Steps> steps = rr.get(pos).getSteps();
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Recipe>> call, Throwable t) {
+
+            }
+        });
+
+    }
+}

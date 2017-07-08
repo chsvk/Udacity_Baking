@@ -1,12 +1,11 @@
 package com.example.vamshi.baking.Data;
 
 
-
 /**
  * Created by Vamshi on 6/16/2017.
  */
 
-public class Steps{
+public class Steps {
 
 
 

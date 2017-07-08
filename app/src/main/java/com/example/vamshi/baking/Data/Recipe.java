@@ -1,18 +1,18 @@
 package com.example.vamshi.baking.Data;
 
+import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * Created by Vamshi on 6/16/2017.
  */
 
-public class Recipe{
+public class Recipe {
 
     private String id;
     private String name;
-    public static List<Ingredients> ingredients;
-    public static List<Steps> steps;
+    private List<Ingredients> ingredients = new ArrayList<>();
+    private List<Steps> steps = new ArrayList<>();
     private String servings;
 
     public Recipe(String id, String name,  String servings, List<Ingredients> ingredients, List<Steps> steps) {
@@ -43,20 +43,20 @@ public class Recipe{
         this.name = name;
     }
 
-    public static List<Ingredients> getIngredients() {
+    public List<Ingredients> getIngredients() {
         return ingredients;
     }
 
-    public static void setIngredients(List<Ingredients> ingredients) {
-        Recipe.ingredients = ingredients;
+    public void setIngredients(List<Ingredients> ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public static List<Steps> getSteps() {
+    public List<Steps> getSteps() {
         return steps;
     }
 
-    public static void setSteps(List<Steps> steps) {
-        Recipe.steps = steps;
+    public void setSteps(List<Steps> steps) {
+        this.steps = steps;
     }
 
     public String getServings() {

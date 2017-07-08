@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Step"
+        android:textColor="#000"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:padding="10dp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Short Descripton"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:padding="7dp"
+        />
+
+
+
+</LinearLayout>

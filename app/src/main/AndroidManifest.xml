@@ -13,12 +13,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".UI.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    android:configChanges="orientation|keyboardHidden|screenSize"/>
+
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.SecondScreenDetails"></activity>
+        <activity android:name=".UI.SecondScreenDetails"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".UI.StepsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
     </application>
 
 </manifest>
