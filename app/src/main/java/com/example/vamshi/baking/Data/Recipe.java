@@ -2,13 +2,12 @@ package com.example.vamshi.baking.Data;
 
 import java.util.List;
 
-import io.realm.RealmObject;
 
 /**
  * Created by Vamshi on 6/16/2017.
  */
 
-public class Recipe extends RealmObject{
+public class Recipe{
 
     private String id;
     private String name;

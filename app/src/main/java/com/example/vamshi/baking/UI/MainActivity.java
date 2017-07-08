@@ -7,17 +7,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.vamshi.baking.Adapters.ListViewAdapter;
-import com.example.vamshi.baking.Data.DownloadTask;
 import com.example.vamshi.baking.Data.Recipe;
 import com.example.vamshi.baking.R;
+import com.example.vamshi.baking.Retrofit.IRecipe;
+import com.example.vamshi.baking.Retrofit.RetrofitBuilder;
 
 import java.util.ArrayList;
 
-import io.realm.Realm;
-import io.realm.RealmResults;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,28 +26,19 @@ public class MainActivity extends AppCompatActivity {
 
     public static ListView myList;
     public static ListAdapter myAdapter;
-    public static Realm realm;
 
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Realm.init(this);
-        realm = Realm.getDefaultInstance();
-
-        DownloadTask newTask = new DownloadTask();
-        newTask.execute("hi");
         setContentView(R.layout.activity_main);
         myList = (ListView) findViewById(R.id.Recipe_list);
-
-       // getData();
-
         setDisplay();
-
         myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String p = String.valueOf(position);
+//                Toast.makeText(MainActivity.this, p, Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(MainActivity.this, SecondScreenDetails.class);
                 in.putExtra("Position", p);
                 startActivity(in);
@@ -57,22 +49,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void setDisplay(){
 
-        ArrayList<Recipe> finalRecipies = new ArrayList<>();
-        RealmResults<Recipe> rrRecipies = realm.where(Recipe.class).findAll();
+        IRecipe irecipie = RetrofitBuilder.Retrieve();
+        final Call<ArrayList<Recipe>> recipie = irecipie.getRecipe();
+        recipie.enqueue(new Callback<ArrayList<Recipe>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
+                ArrayList<Recipe> mRecipies = new ArrayList<>();
+                mRecipies = response.body();
+                myAdapter = new ListViewAdapter(getApplicationContext(), mRecipies);
+                myList.setAdapter(myAdapter);
+            }
 
-        for(Recipe r: rrRecipies){
-            finalRecipies.add(r);
-            Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
-        }
-        myAdapter = new ListViewAdapter(this, finalRecipies);
-        myList.setAdapter(myAdapter);
+            @Override
+            public void onFailure(Call<ArrayList<Recipe>> call, Throwable t) {
+
+            }
+        });
+
 
     }
 
 
     @Override
     protected void onDestroy() {
-        realm.close();
         super.onDestroy();
     }
 }
