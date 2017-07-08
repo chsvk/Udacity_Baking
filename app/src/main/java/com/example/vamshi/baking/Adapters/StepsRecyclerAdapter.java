@@ -1,13 +1,17 @@
 package com.example.vamshi.baking.Adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vamshi.baking.Data.Steps;
 import com.example.vamshi.baking.R;
+import com.example.vamshi.baking.UI.SingleStepItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +24,11 @@ public class StepsRecyclerAdapter extends RecyclerView.Adapter<StepsRecyclerAdap
 
 
     List<Steps> mSteps = new ArrayList<>();
+    public Context context;
 
-    public StepsRecyclerAdapter(List<Steps> m){
+    public StepsRecyclerAdapter(List<Steps> m, Context context){
         this.mSteps = m;
+        this.context = context;
     }
 
     @Override
@@ -32,9 +38,20 @@ public class StepsRecyclerAdapter extends RecyclerView.Adapter<StepsRecyclerAdap
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.step_number.setText(String.valueOf(Integer.parseInt(mSteps.get(position).getId()) + 1));
         holder.step_short_description.setText(mSteps.get(position).getShortDescription());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(context, SingleStepItem.class);
+                in.putExtra("id",String.valueOf(Integer.parseInt(mSteps.get(position).getId()) + 1));
+                in.putExtra("short",mSteps.get(position).getShortDescription());
+                in.putExtra("long", mSteps.get(position).getDescription());
+                in.putExtra("video",mSteps.get(position).getVideoURL());
+                context.startActivity(in);
+            }
+        });
     }
 
     @Override

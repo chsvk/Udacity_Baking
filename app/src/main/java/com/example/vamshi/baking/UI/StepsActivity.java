@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class StepsActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
                 List<Recipe> rr = response.body();
                 List<Steps> steps = rr.get(pos).getSteps();
-                myAdapter = new StepsRecyclerAdapter(steps);
+                myAdapter = new StepsRecyclerAdapter(steps, StepsActivity.this);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 steps_list.setLayoutManager(mLayoutManager);
                 steps_list.setItemAnimator(new DefaultItemAnimator());

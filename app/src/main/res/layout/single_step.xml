@@ -32,6 +32,10 @@
             android:padding="7dp"
             />
 
+        <VideoView
+            android:id="@+id/video_player"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
 
         <TextView
             android:id="@+id/long_description"

@@ -24,6 +24,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity android:name=".UI.StepsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity android:name=".UI.SingleStepItem"/>
     </application>
 
 </manifest>
