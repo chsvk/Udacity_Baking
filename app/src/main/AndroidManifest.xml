@@ -13,19 +13,32 @@
         android:theme="@style/AppTheme">
         <activity android:name=".UI.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"
-                    android:configChanges="orientation|keyboardHidden|screenSize"/>
-
+                <action
+                    android:name="android.intent.action.MAIN"
+                    android:configChanges="orientation|keyboardHidden|screenSize" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.SecondScreenDetails"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
-        <activity android:name=".UI.StepsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
-        <activity android:name=".UI.SingleStepItem"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity
+            android:name=".UI.SecondScreenDetails"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".UI.StepsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".UI.SingleStepItem"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <receiver android:name=".Widget.BakingWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/baking_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
