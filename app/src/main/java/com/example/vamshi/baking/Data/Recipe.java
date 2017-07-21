@@ -14,17 +14,27 @@ public class Recipe {
     private List<Ingredients> ingredients = new ArrayList<>();
     private List<Steps> steps = new ArrayList<>();
     private String servings;
+    private String image;
 
-    public Recipe(String id, String name,  String servings, List<Ingredients> ingredients, List<Steps> steps) {
+    public Recipe(String id, String name,  String servings, List<Ingredients> ingredients, List<Steps> steps, String image) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.steps = steps;
         this.servings = servings;
+        this.image = image;
     }
 
     public Recipe(){
 
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getId() {

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.example.vamshi.baking.UI.MainActivity">
 
    <!-- <TextView
@@ -13,14 +13,12 @@
         -->
 
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/Recipe_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="9dp"
-        android:layout_gravity="center">
+        android:layout_height="wrap_content">
 
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>
