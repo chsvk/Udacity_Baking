@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.vamshi.baking.Data.Ingredients;
 import com.example.vamshi.baking.Data.Recipe;
+import com.example.vamshi.baking.Data.Steps;
 import com.example.vamshi.baking.R;
 import com.example.vamshi.baking.UI.MainActivity;
 import com.example.vamshi.baking.UI.SecondScreenDetails;
@@ -27,7 +29,7 @@ import java.util.List;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>{
 
-    List<Recipe> mRecipies = new ArrayList<>();
+    ArrayList<Recipe> mRecipies = new ArrayList<>();
     Context context;
 
 
@@ -45,7 +47,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         }
     }
 
-    public MainRecyclerViewAdapter(List<Recipe> mRecipies, Context context){
+    public MainRecyclerViewAdapter(ArrayList<Recipe> mRecipies, Context context){
         this.mRecipies = mRecipies;
         this.context = context;
     }
@@ -57,7 +59,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         Recipe r = mRecipies.get(position);
         holder.titleText.setText(r.getName());
@@ -70,11 +72,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             @Override
             public void onClick(View v) {
 
-                List<Ingredients> i  = new ArrayList<>();
-                i = mRecipies.get(position).getIngredients();
+                ArrayList<Ingredients> i = mRecipies.get(position).getIngredients();
+                ArrayList<Steps> s = mRecipies.get(position).getSteps();
                 Intent in = new Intent(context, SecondScreenDetails.class);
-                Bundle b = new Bundle();
-//                b.putParcelableArrayList("Ingredients", );
+                in.putParcelableArrayListExtra("Ingredients", i);
+                in.putParcelableArrayListExtra("Steps", s);
+                context.startActivity(in);
             }
         });
 
