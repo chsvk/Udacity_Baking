@@ -1,10 +1,14 @@
 package com.example.vamshi.baking.UI;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.vamshi.baking.Adapters.MainRecyclerViewAdapter;
 import com.example.vamshi.baking.Data.Recipe;
@@ -27,17 +31,19 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.Recipe_list)RecyclerView myRecipeList;
     public MainRecyclerViewAdapter myAdapter;
-    public List<Recipe> mRecipies;
-
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setDisplay();
 
-
+        // CHECKING NETWORK CONNECTION
+        if(!isNetworkAvailable()){
+            Toast.makeText(this, "Please Connect To The Internet!", Toast.LENGTH_SHORT).show();
+        }else{
+            setDisplay();
+        }
     }
 
     public void setDisplay(){
@@ -62,12 +68,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 }
+
+
 
 
