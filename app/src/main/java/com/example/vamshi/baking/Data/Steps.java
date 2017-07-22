@@ -16,13 +16,15 @@ public class Steps implements Parcelable{
     private String shortDescription;
     private String description;
     private String videoURL;
+    private String thumbnailURL;
 
-    public Steps(String id, String shortDescription, String description, String videoURL) {
+    public Steps(String id, String shortDescription, String description, String videoURL, String thumbnailURL) {
 
         this.id = id;
         this.shortDescription = shortDescription;
         this.description = description;
         this.videoURL = videoURL;
+        this.thumbnailURL = thumbnailURL;
     }
 
     public Steps(){
@@ -35,9 +37,18 @@ public class Steps implements Parcelable{
         shortDescription = in.readString();
         description = in.readString();
         videoURL = in.readString();
+        thumbnailURL = in.readString();
 
     }
 
+
+    public String getThumbnailURL() {
+        return thumbnailURL;
+    }
+
+    public void setThumbnailURL(String thumbnailURL) {
+        this.thumbnailURL = thumbnailURL;
+    }
 
     public String getId() {
         return id;
@@ -83,6 +94,7 @@ public class Steps implements Parcelable{
         dest.writeString(shortDescription);
         dest.writeString(description);
         dest.writeString(videoURL);
+        dest.writeString(thumbnailURL);
 
     }
 

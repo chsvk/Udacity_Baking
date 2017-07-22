@@ -2,6 +2,7 @@ package com.example.vamshi.baking.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,7 +44,12 @@ public class SecondScreenDetails extends AppCompatActivity {
         ButterKnife.bind(this);
         ing = getIntent().getParcelableArrayListExtra("Ingredients");
         ste = getIntent().getParcelableArrayListExtra("Steps");
-        setDisplay();
+        myAdapter = new SecondScreenRecyclerViewAdapter(ing);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        ingre_list.setLayoutManager(mLayoutManager);
+        ingre_list.setItemAnimator(new DefaultItemAnimator());
+        ingre_list.setAdapter(myAdapter);
+
 
 
         next_button.setOnClickListener(new View.OnClickListener() {
@@ -58,37 +64,21 @@ public class SecondScreenDetails extends AppCompatActivity {
         });
     }
 
-    private void setDisplay() {
+    //Saving the scroll position
 
-        myAdapter = new SecondScreenRecyclerViewAdapter(ing);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        ingre_list.setLayoutManager(mLayoutManager);
-        ingre_list.setItemAnimator(new DefaultItemAnimator());
-        ingre_list.setAdapter(myAdapter);
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable("KeyForLayoutManagerState", ingre_list.getLayoutManager().onSaveInstanceState());
+        super.onSaveInstanceState(outState);
+    }
 
-//        Intent in = getIntent();
-//        final int a = Integer.parseInt(in.getStringExtra("Position"));
-//        IRecipe irecipie = RetrofitBuilder.Retrieve();
-//        final Call<ArrayList<Recipe>> recipie = irecipie.getRecipe();
-//        recipie.enqueue(new Callback<ArrayList<Recipe>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
-//                ArrayList<Recipe> r = response.body();
-//                List<Ingredients> i = r.get(a).getIngredients();
-//                ArrayList<Ingredients> i = getIntent().getParcelableArrayListExtra("Ingredients");
-//                myAdapter = new SecondScreenRecyclerViewAdapter(i);
-//                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//                ingre_list.setLayoutManager(mLayoutManager);
-//                ingre_list.setItemAnimator(new DefaultItemAnimator());
-//                ingre_list.setAdapter(myAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<Recipe>> call, Throwable t) {
-//
-//            }
-//        });
-//
-//
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        if(savedInstanceState != null)
+        {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable("KeyForLayoutManagerState");
+            ingre_list.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+        super.onRestoreInstanceState(savedInstanceState);
     }
 }

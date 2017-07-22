@@ -1,6 +1,7 @@
 package com.example.vamshi.baking.UI;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -29,14 +30,14 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.Recipe_list)RecyclerView myRecipeList;
+    public RecyclerView myRecipeList;
     public MainRecyclerViewAdapter myAdapter;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        myRecipeList = (RecyclerView)findViewById(R.id.Recipe_list);
 
         // CHECKING NETWORK CONNECTION
         if(!isNetworkAvailable()){
@@ -79,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    public boolean isTablet(Context context) {
+        boolean xlarge = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 4);
+        boolean large = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE);
+        return (xlarge || large);
+    }
+
 }
 
 
