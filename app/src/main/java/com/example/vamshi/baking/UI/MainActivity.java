@@ -18,10 +18,7 @@ import com.example.vamshi.baking.Retrofit.IRecipe;
 import com.example.vamshi.baking.Retrofit.RetrofitBuilder;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

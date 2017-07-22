@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class SecondScreenDetails extends AppCompatActivity {
     public static SecondScreenRecyclerViewAdapter myAdapter;
     public ArrayList<Ingredients> ing;
     public ArrayList<Steps> ste;
+    public Boolean isTablet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +51,31 @@ public class SecondScreenDetails extends AppCompatActivity {
         ingre_list.setLayoutManager(mLayoutManager);
         ingre_list.setItemAnimator(new DefaultItemAnimator());
         ingre_list.setAdapter(myAdapter);
-
+        DisplayMetrics metrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        float yInches= metrics.heightPixels/metrics.ydpi;
+        float xInches= metrics.widthPixels/metrics.xdpi;
+        double diagonalInches = Math.sqrt(xInches*xInches + yInches*yInches);
+        if (diagonalInches>=6.5){
+            // 6.5inch device or bigger
+            isTablet = true;
+        }else{
+            // smaller device
+            isTablet = false;
+        }
 
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = getIntent();
-                Intent i = new Intent(SecondScreenDetails.this, StepsActivity.class);
-//                i.putExtra("position", in.getStringExtra("Position"));
-                i.putParcelableArrayListExtra("Steps", ste);
-                startActivity(i);
+                if(isTablet){
+                    Toast.makeText(SecondScreenDetails.this, "Apun Tablet me heih", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent i = new Intent(SecondScreenDetails.this, StepsActivity.class);
+                    i.putParcelableArrayListExtra("Steps", ste);
+                    startActivity(i);
+                }
+
             }
         });
     }
@@ -81,4 +97,5 @@ public class SecondScreenDetails extends AppCompatActivity {
         }
         super.onRestoreInstanceState(savedInstanceState);
     }
+
 }
