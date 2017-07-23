@@ -1,27 +1,20 @@
 package com.example.vamshi.baking.UI;
 
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.example.vamshi.baking.Adapters.MasterDetailFlowAdapter;
-import com.example.vamshi.baking.Adapters.StepsRecyclerAdapter;
 import com.example.vamshi.baking.Data.Steps;
 import com.example.vamshi.baking.R;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
-import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
 
@@ -59,4 +52,37 @@ public class MasterDetailFlow extends AppCompatActivity {
         steps_list.setItemAnimator(new DefaultItemAnimator());
         steps_list.setAdapter(myAdapter);
     }
+
+    private void releasePlayer(){
+        myPlayer.stop();
+        myPlayer.release();
+        myPlayer = null;
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        if(myPlayer!=null){
+            releasePlayer();
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(myPlayer!=null){
+            releasePlayer();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        if(myPlayer!=null){
+            releasePlayer();
+        }
+        super.onPause();
+    }
+
 }

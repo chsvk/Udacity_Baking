@@ -10,8 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.example.vamshi.baking.Adapters.MainRecyclerViewAdapter;
 import com.example.vamshi.baking.Adapters.SecondScreenRecyclerViewAdapter;
 import com.example.vamshi.baking.Data.Ingredients;
 import com.example.vamshi.baking.Data.Recipe;
@@ -21,7 +21,6 @@ import com.example.vamshi.baking.Retrofit.IRecipe;
 import com.example.vamshi.baking.Retrofit.RetrofitBuilder;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,23 +45,28 @@ public class SecondScreenDetails extends AppCompatActivity {
         ButterKnife.bind(this);
         ing = getIntent().getParcelableArrayListExtra("Ingredients");
         ste = getIntent().getParcelableArrayListExtra("Steps");
-        myAdapter = new SecondScreenRecyclerViewAdapter(ing);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        ingre_list.setLayoutManager(mLayoutManager);
-        ingre_list.setItemAnimator(new DefaultItemAnimator());
-        ingre_list.setAdapter(myAdapter);
-        DisplayMetrics metrics = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        float yInches= metrics.heightPixels/metrics.ydpi;
-        float xInches= metrics.widthPixels/metrics.xdpi;
-        double diagonalInches = Math.sqrt(xInches*xInches + yInches*yInches);
-        if (diagonalInches>=6.5){
-            // 6.5inch device or bigger
-            isTablet = true;
+        if(ing==null){
+            setDisplay();
         }else{
-            // smaller device
-            isTablet = false;
+            myAdapter = new SecondScreenRecyclerViewAdapter(ing);
+            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+            ingre_list.setLayoutManager(mLayoutManager);
+            ingre_list.setItemAnimator(new DefaultItemAnimator());
+            ingre_list.setAdapter(myAdapter);
+            DisplayMetrics metrics = new DisplayMetrics();
+            this.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            float yInches= metrics.heightPixels/metrics.ydpi;
+            float xInches= metrics.widthPixels/metrics.xdpi;
+            double diagonalInches = Math.sqrt(xInches*xInches + yInches*yInches);
+            if (diagonalInches>=6.5){
+                // 6.5inch device or bigger
+                isTablet = true;
+            }else{
+                // smaller device
+                isTablet = false;
+            }
         }
+
 
 
         next_button.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +84,30 @@ public class SecondScreenDetails extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void setDisplay(){
+        next_button.setVisibility(View.GONE);
+        IRecipe irecipie = RetrofitBuilder.Retrieve();
+        final Call<ArrayList<Recipe>> recipie = irecipie.getRecipe();
+        recipie.enqueue(new Callback<ArrayList<Recipe>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
+                ArrayList<Recipe> r = response.body();
+                ing = r.get(0).getIngredients();
+                myAdapter = new SecondScreenRecyclerViewAdapter(ing);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                ingre_list.setLayoutManager(mLayoutManager);
+                ingre_list.setItemAnimator(new DefaultItemAnimator());
+                ingre_list.setAdapter(myAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Recipe>> call, Throwable t) {
+
+            }
+        });
+
     }
 
     //Saving the scroll position

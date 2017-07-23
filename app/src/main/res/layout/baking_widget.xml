@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/widgetImage"
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="350dp"
         android:src="@drawable/brownies"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"/>

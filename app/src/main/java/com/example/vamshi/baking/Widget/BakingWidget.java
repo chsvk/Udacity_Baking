@@ -9,6 +9,7 @@ import android.widget.RemoteViews;
 
 import com.example.vamshi.baking.R;
 import com.example.vamshi.baking.UI.MainActivity;
+import com.example.vamshi.baking.UI.SecondScreenDetails;
 
 /**
  * Implementation of App Widget functionality.
@@ -21,7 +22,7 @@ public class BakingWidget extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.baking_widget);
-        Intent in = new Intent(context, MainActivity.class);
+        Intent in = new Intent(context, SecondScreenDetails.class);
         PendingIntent pi = PendingIntent.getActivities(context, 0, new Intent[]{in}, 0);
         views.setOnClickPendingIntent(R.id.widgetImage, pi);
         // Instruct the widget manager to update the widget
