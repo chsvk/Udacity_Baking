@@ -69,7 +69,9 @@ public class SecondScreenDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isTablet){
-                    Toast.makeText(SecondScreenDetails.this, "Apun Tablet me heih", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(SecondScreenDetails.this, MasterDetailFlow.class);
+                    i.putParcelableArrayListExtra("Steps", ste);
+                    startActivity(i);
                 }else {
                     Intent i = new Intent(SecondScreenDetails.this, StepsActivity.class);
                     i.putParcelableArrayListExtra("Steps", ste);
