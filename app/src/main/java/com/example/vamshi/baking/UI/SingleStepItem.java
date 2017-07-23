@@ -37,6 +37,7 @@ public class SingleStepItem extends AppCompatActivity {
     @BindView(R.id.stepHeading)TextView stepHeading;
     @BindView(R.id.short_description)TextView shortDescription;
     @BindView(R.id.long_description)TextView longDescription;
+    public Boolean landScape = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,19 +45,25 @@ public class SingleStepItem extends AppCompatActivity {
         setContentView(R.layout.single_step);
         ButterKnife.bind(this);
         Intent in = getIntent();
+        checkOrientation();
         stepHeading.setText("Step: " + in.getStringExtra("id"));
         shortDescription.setText(in.getStringExtra("short"));
         longDescription.setText(in.getStringExtra("long"));
         if (in.getStringExtra("video").trim().isEmpty()) {
+            checkOrientation();
             Toast.makeText(this, "Step Contains No Video", Toast.LENGTH_SHORT).show();
+            myExoPlayer.setVisibility(View.GONE);
         } else {
-            if(isInLandscapeMode(this)) {
+            checkOrientation();
+            if(landScape) {
+                myExoPlayer.getLayoutParams().height = 260;
+                myExoPlayer.requestLayout();
                 initializePlayer(Uri.parse(in.getStringExtra("video").trim()));
                 stepHeading.setVisibility(View.GONE);
                 shortDescription.setVisibility(View.GONE);
                 longDescription.setVisibility(View.GONE);
             }
-            if(!isInLandscapeMode(this)) {
+            if(!landScape) {
                 initializePlayer(Uri.parse(in.getStringExtra("video").trim()));
                 stepHeading.setVisibility(View.VISIBLE);
                 shortDescription.setVisibility(View.VISIBLE);
@@ -66,6 +73,15 @@ public class SingleStepItem extends AppCompatActivity {
         }
 
         }
+
+    private void checkOrientation() {
+        if(isInLandscapeMode(this)){
+            landScape = true;
+        }
+        if(!isInLandscapeMode(this)){
+            landScape = false;
+        }
+    }
 
 
     private void initializePlayer(Uri video) {
