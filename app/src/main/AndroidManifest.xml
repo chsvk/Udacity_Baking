@@ -26,10 +26,10 @@
              />
         <activity
             android:name=".UI.StepsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+             />
         <activity
             android:name=".UI.SingleStepItem"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+             />
 
         <receiver android:name=".Widget.BakingWidget">
             <intent-filter>
