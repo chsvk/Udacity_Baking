@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.vamshi.baking.Data.Ingredients;
 import com.example.vamshi.baking.Data.Recipe;
 import com.example.vamshi.baking.Data.Steps;
@@ -66,6 +67,8 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         holder.servingsText.setText("Servings:- " + r.getServings());
         if(r.getImage().isEmpty()){
             holder.thumbnail.setImageResource(R.drawable.temp);
+        }else{
+            Glide.with(context).load(r.getImage().trim()).into(holder.thumbnail);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

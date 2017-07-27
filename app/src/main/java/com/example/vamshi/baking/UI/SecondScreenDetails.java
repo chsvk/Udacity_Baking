@@ -11,7 +11,6 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.vamshi.baking.Adapters.MainRecyclerViewAdapter;
 import com.example.vamshi.baking.Adapters.SecondScreenRecyclerViewAdapter;
 import com.example.vamshi.baking.Data.Ingredients;
 import com.example.vamshi.baking.Data.Recipe;

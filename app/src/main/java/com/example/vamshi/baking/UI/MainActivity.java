@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public RecyclerView myRecipeList;
     public MainRecyclerViewAdapter myAdapter;
+    public ArrayList<Recipe> r;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
@@ -40,18 +41,32 @@ public class MainActivity extends AppCompatActivity {
         if(!isNetworkAvailable()){
             Toast.makeText(this, "Please Connect To The Internet!", Toast.LENGTH_SHORT).show();
         }else{
+            FetchData();
+        }
+        if(savedInstanceState==null){
+            FetchData();
+        }else{
+            onRestoreInstanceState(savedInstanceState);
             setDisplay();
         }
     }
 
-    public void setDisplay(){
+    private void setDisplay() {
+        myAdapter = new MainRecyclerViewAdapter(r, MainActivity.this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        myRecipeList.setLayoutManager(mLayoutManager);
+        myRecipeList.setItemAnimator(new DefaultItemAnimator());
+        myRecipeList.setAdapter(myAdapter);
+    }
+
+    public void FetchData(){
 
         IRecipe irecipie = RetrofitBuilder.Retrieve();
         final Call<ArrayList<Recipe>> recipie = irecipie.getRecipe();
         recipie.enqueue(new Callback<ArrayList<Recipe>>() {
             @Override
             public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
-                ArrayList<Recipe> r = response.body();
+                r = response.body();
                 myAdapter = new MainRecyclerViewAdapter(r, MainActivity.this);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 myRecipeList.setLayoutManager(mLayoutManager);
@@ -84,6 +99,17 @@ public class MainActivity extends AppCompatActivity {
         return (xlarge || large);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("FullR", r);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        r = savedInstanceState.getParcelableArrayList("FullR");
+    }
 }
 
 

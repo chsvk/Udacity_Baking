@@ -35,7 +35,7 @@ public class MainActivityTest {
     @Test
     public void clickListViewItem_OpensProcedureActivity() {
 
-        onData(anything()).inAdapterView(withId(R.id.Recipe_list)).atPosition(0).perform(click());
+//        onData(anything()).inAdapterView(withId(R.id.Recipe_list)).atPosition(0).perform(click());
         //Set as invisible after Testing
         onView(withId(R.id.text_view_for_testing_number_of_recipies)).check(matches(withText("4")));
         onView(withId(R.id.text_view_for_testing)).check(matches(withText("Nutella Pie")));
