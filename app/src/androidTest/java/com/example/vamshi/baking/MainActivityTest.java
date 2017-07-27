@@ -1,5 +1,6 @@
 package com.example.vamshi.baking;
 
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -36,8 +37,9 @@ public class MainActivityTest {
     public void clickListViewItem_OpensProcedureActivity() {
 
 //        onData(anything()).inAdapterView(withId(R.id.Recipe_list)).atPosition(0).perform(click());
+        onView(withId(R.id.Recipe_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         //Set as invisible after Testing
-        onView(withId(R.id.text_view_for_testing_number_of_recipies)).check(matches(withText("4")));
+        onView(withId(R.id.text_view_for_testing_number_of_recipies)).check(matches(withText("3")));
         onView(withId(R.id.text_view_for_testing)).check(matches(withText("Nutella Pie")));
 
     }
