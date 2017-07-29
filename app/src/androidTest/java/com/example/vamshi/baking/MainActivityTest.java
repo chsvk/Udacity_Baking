@@ -10,13 +10,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.anything;
 
 /**
  * Created by Vamshi on 6/20/2017.
@@ -36,7 +34,6 @@ public class MainActivityTest {
     @Test
     public void clickListViewItem_OpensProcedureActivity() {
 
-//        onData(anything()).inAdapterView(withId(R.id.Recipe_list)).atPosition(0).perform(click());
         onView(withId(R.id.Recipe_list)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
         //Set as invisible after Testing
         onView(withId(R.id.text_view_for_testing_number_of_recipies)).check(matches(withText("3")));
