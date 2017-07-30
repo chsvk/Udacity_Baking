@@ -45,7 +45,7 @@ public class Ingredients extends AppWidgetProvider {
                 context.getPackageName(),R.layout.ingredients);
 
         //RemoteViews Service needed to provide adapter for ListView
-        Intent svcIntent = new Intent(context, WidgetService.class);
+        Intent svcIntent = new Intent(context, WidgetViewAdapter.class);
         //passing app widget id to that RemoteViews Service
         svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         //setting a unique Uri to the intent
