@@ -67,12 +67,12 @@
                     android:padding="7dp"
                     />
 
-                <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                <com.devbrackets.android.exomedia.ui.widget.VideoView
                     android:layout_width="match_parent"
                     android:layout_height="210dp"
-                    android:id="@+id/video_player"
+                    android:id="@+id/video_player">
 
-                    ></com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+                </com.devbrackets.android.exomedia.ui.widget.VideoView>
 
                 <TextView
                     android:id="@+id/long_description"

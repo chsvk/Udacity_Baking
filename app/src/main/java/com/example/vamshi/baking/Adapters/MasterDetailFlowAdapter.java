@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.devbrackets.android.exomedia.listener.OnPreparedListener;
 import com.example.vamshi.baking.Data.Steps;
 import com.example.vamshi.baking.R;
 import com.example.vamshi.baking.UI.MasterDetailFlow;
@@ -46,6 +47,7 @@ public class MasterDetailFlowAdapter extends RecyclerView.Adapter<MasterDetailFl
     @Override
     public void onBindViewHolder(final MasterDetailFlowAdapter.MyViewHolder holder, final int position) {
         holder.step_number.setText(String.valueOf(Integer.parseInt(mSteps.get(position).getId()) + 1));
+        MasterDetailFlow.myPlayer.setVisibility(View.GONE);
         holder.step_short_description.setText(mSteps.get(position).getShortDescription());
         if(mSteps.get(position).getThumbnailURL().isEmpty()){
             holder.thumbnail.setVisibility(View.GONE);
@@ -60,17 +62,10 @@ public class MasterDetailFlowAdapter extends RecyclerView.Adapter<MasterDetailFl
                 MasterDetailFlow.longDescription.setText(mSteps.get(position).getDescription());
                 if (mSteps.get(position).getVideoURL().trim().isEmpty()) {
                     Toast.makeText(context, "Step Contains No Video", Toast.LENGTH_SHORT).show();
-                    MasterDetailFlow.myExoPlayer.setVisibility(View.GONE);
+                    MasterDetailFlow.myPlayer.setVisibility(View.GONE);
                 } else {
-                    MasterDetailFlow.myExoPlayer.setVisibility(View.VISIBLE);
-                        if(MasterDetailFlow.myPlayer == null){
-                            MasterDetailFlow.myExoPlayer.setVisibility(View.VISIBLE);
-                            String userAgent = Util.getUserAgent(context, "Baking");
-                            MediaSource mSource = new ExtractorMediaSource(Uri.parse(mSteps.get(position).getVideoURL().trim()), new DefaultDataSourceFactory(context, userAgent), new DefaultExtractorsFactory(), null, null);
-                            MasterDetailFlow.myPlayer.prepare(mSource);
-                            MasterDetailFlow.myPlayer.setPlayWhenReady(true);
-
-                        }
+                    MasterDetailFlow.myPlayer.setVisibility(View.VISIBLE);
+                    MasterDetailFlow.myPlayer.setVideoURI(Uri.parse(mSteps.get(position).getVideoURL().trim()));
                 }
             }
         });
