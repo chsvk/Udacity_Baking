@@ -38,7 +38,7 @@ public class WidgetService extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
             ArrayList<String> fromActivityIngredientsList = intent.getExtras().getStringArrayList(FROM_ACTIVITY_INGREDIENTS_LIST);
-            handleActionUpdateBakingWidgets(fromActivityIngredientsList);
+            handleActionUpdateBakingWidgets(fromActivityIngredientsList );
 
         }
     }
