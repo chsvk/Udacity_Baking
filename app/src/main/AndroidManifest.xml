@@ -22,41 +22,19 @@
         <activity android:name=".UI.SecondScreenDetails" />
         <activity android:name=".UI.StepsActivity" />
         <activity android:name=".UI.SingleStepItem" />
-
-        <receiver android:name=".Widget.BakingWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/baking_widget_info" />
-        </receiver>
-
-        <service
-            android:name=".Widget.Service.WidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
         <activity android:name=".UI.MasterDetailFlow" />
 
-        <receiver android:name=".Widget.Ingredients">
+        <receiver android:name=".Widget.ListWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/ingredients_info" />
+                android:resource="@xml/list_widget_info" />
         </receiver>
-        <receiver android:name=".Widget.DisplayIngredients">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/display_ingredients_info" />
-        </receiver>
+        <service android:name=".Widget.RemoteViewService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>

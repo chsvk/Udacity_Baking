@@ -1,6 +1,7 @@
 package com.example.vamshi.baking.UI;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.example.vamshi.baking.Adapters.MainRecyclerViewAdapter;
+import com.example.vamshi.baking.Data.Ingredients;
 import com.example.vamshi.baking.Data.Recipe;
 import com.example.vamshi.baking.R;
 import com.example.vamshi.baking.Retrofit.IRecipe;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public RecyclerView myRecipeList;
     public MainRecyclerViewAdapter myAdapter;
     public ArrayList<Recipe> r;
+    public ArrayList<Ingredients> i;
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ArrayList<Recipe>> call, Response<ArrayList<Recipe>> response) {
                 r = response.body();
+                i = r.get(0).getIngredients();
+                SharedPreferences sharedPreferences = getSharedPreferences("Ingredients", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                for (int j =0; j< i.size(); j++){
+                    editor.putString("Ingredient"+ (String.valueOf(j)), i.get(j).getIngredient() );
+                }
+                editor.apply();
                 myAdapter = new MainRecyclerViewAdapter(r, MainActivity.this);
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                 myRecipeList.setLayoutManager(mLayoutManager);
