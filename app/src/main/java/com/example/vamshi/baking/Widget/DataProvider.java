@@ -39,8 +39,9 @@ public class DataProvider implements RemoteViewsService.RemoteViewsFactory {
 
     private void getData() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("Ingredients", Context.MODE_PRIVATE);
+        String fav = sharedPreferences.getString("FAV", "");
         for (int b=0; b<7; b++){
-            mCollections.add(sharedPreferences.getString("Ingredient"+ (String.valueOf(b)), ""));
+            mCollections.add(sharedPreferences.getString("Ingredient"+ fav + (String.valueOf(b)), ""));
         }
     }
 

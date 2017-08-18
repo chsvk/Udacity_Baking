@@ -1,6 +1,7 @@
 package com.example.vamshi.baking.UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
@@ -10,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.vamshi.baking.Adapters.MainRecyclerViewAdapter;
@@ -73,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
                 i = r.get(0).getIngredients();
                 SharedPreferences sharedPreferences = getSharedPreferences("Ingredients", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                for (int j =0; j< i.size(); j++){
-                    editor.putString("Ingredient"+ (String.valueOf(j)), i.get(j).getIngredient() );
+                for(int a=0; a<r.size(); a++){
+                    i = r.get(a).getIngredients();
+                    for (int j =0; j< i.size(); j++){
+                        editor.putString("Ingredient"+ String.valueOf(a) + (String.valueOf(j)), i.get(j).getIngredient());
+                    }
                 }
                 editor.apply();
                 myAdapter = new MainRecyclerViewAdapter(r, MainActivity.this);
@@ -119,6 +126,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         r = savedInstanceState.getParcelableArrayList("FullR");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.fav_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case R.id.Settings: {
+                Intent in = new Intent(MainActivity.this, Settings.class);
+                startActivity(in);
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
