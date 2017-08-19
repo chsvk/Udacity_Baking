@@ -48,14 +48,18 @@ public class MainActivity extends AppCompatActivity {
         if(!isNetworkAvailable()){
             Toast.makeText(this, "Please Connect To The Internet!", Toast.LENGTH_SHORT).show();
         }else{
-            FetchData();
+            if (r!=null && !r.isEmpty())
+                setDisplay();
+            else FetchData();
+
+            if(savedInstanceState==null){
+                FetchData();
+            }else{
+                onRestoreInstanceState(savedInstanceState);
+                setDisplay();
+            }
         }
-        if(savedInstanceState==null){
-            FetchData();
-        }else{
-            onRestoreInstanceState(savedInstanceState);
-            setDisplay();
-        }
+
     }
 
     private void setDisplay() {
