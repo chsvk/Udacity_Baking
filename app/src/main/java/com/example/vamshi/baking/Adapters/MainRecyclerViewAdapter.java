@@ -91,4 +91,10 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         return mRecipies.size();
     }
 
+    public void setData(ArrayList<Recipe> mRecipies){
+
+        this.mRecipies = mRecipies;
+        notifyDataSetChanged();
+
+    }
 }

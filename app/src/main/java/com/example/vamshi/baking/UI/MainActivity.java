@@ -43,31 +43,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myRecipeList = (RecyclerView)findViewById(R.id.Recipe_list);
-
+        r = new ArrayList<>();
         // CHECKING NETWORK CONNECTION
         if(!isNetworkAvailable()){
             Toast.makeText(this, "Please Connect To The Internet!", Toast.LENGTH_SHORT).show();
         }else{
-            if (r!=null && !r.isEmpty())
-                setDisplay();
-            else FetchData();
 
-            if(savedInstanceState==null){
-                FetchData();
-            }else{
-                onRestoreInstanceState(savedInstanceState);
-                setDisplay();
-            }
+            setDisplay();
+            FetchData();
+//            if (r!=null && !r.isEmpty())
+//                setDisplay();
+//            else FetchData();
+//
+//            if(savedInstanceState==null){
+//                FetchData();
+//            }else{
+//                onRestoreInstanceState(savedInstanceState);
+//                setDisplay();
+//            }
         }
+
 
     }
 
     private void setDisplay() {
         myAdapter = new MainRecyclerViewAdapter(r, MainActivity.this);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        myAdapter.setData(r);
         myRecipeList.setLayoutManager(mLayoutManager);
         myRecipeList.setItemAnimator(new DefaultItemAnimator());
         myRecipeList.setAdapter(myAdapter);
+
     }
 
     public void FetchData(){
@@ -88,11 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 editor.apply();
-                myAdapter = new MainRecyclerViewAdapter(r, MainActivity.this);
-                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                myRecipeList.setLayoutManager(mLayoutManager);
-                myRecipeList.setItemAnimator(new DefaultItemAnimator());
-                myRecipeList.setAdapter(myAdapter);
+               myAdapter.setData(r);
             }
 
             @Override
